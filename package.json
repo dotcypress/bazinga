@@ -1,0 +1,37 @@
+{
+  "name": "bazinga",
+  "version": "0.0.0",
+  "description": "Awesome static web server",
+  "main": "index.js",
+  "homepage": "https://github.com/dotCypress/bazinga",
+  "bugs": "https://github.com/dotCypress/bazinga/issues",
+  "scripts": {
+    "test": "mocha --reporter spec --compilers coffee:coffee-script"
+  },
+  "bin": {
+    "bazinga": "./bin/bazinga"
+  },
+  "dependencies": {
+    "coffee-script": "~1.6.3",
+    "commander": "~2.0.0"
+  },
+  "devDependencies": {
+    "mocha": "~1.12.0"
+  },
+  "engines": {
+    "node": ">=0.8.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/dotCypress/bazinga.git"
+  },
+  "keywords": [
+    "static",
+    "http",
+    "server",
+    "development"
+  ],
+  "author": "Vitaly Domnikov <dotcypress@gmail.com",
+  "license": "MIT",
+  "readmeFilename": "README.md"
+}
