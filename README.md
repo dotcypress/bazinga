@@ -1,4 +1,4 @@
-# Bazinga - Awesome static web server [![Build Status](https://secure.travis-ci.org/dotCypress/bazinga.png?branch=master)](https://travis-ci.org/dotCypress/bazinga)
+# Bazinga [![Build Status](https://secure.travis-ci.org/dotCypress/bazinga.png?branch=master)](https://travis-ci.org/dotCypress/bazinga)
 
 Bazinga is awesome static web server, that's all ;)
 
@@ -15,6 +15,7 @@ Bazinga is awesome static web server, that's all ;)
     -h, --help           output usage information
     -V, --version        output the version number
     -c, --config [file]  Set config [%USERPROFILE%/bazinga.toml]
+    -p, --port [port]    Set dashbord port [7373]
 
 ## Sample config
 ```

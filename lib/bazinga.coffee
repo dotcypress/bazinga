@@ -1,4 +1,5 @@
 _ = require 'lodash'
+colors = require 'colors'
 fs = require 'fs'
 http = require 'http'
 path = require 'path'
@@ -6,7 +7,6 @@ program = require 'commander'
 send = require 'send'
 toml = require 'toml-js'
 url = require 'url'
-colors = require 'colors'
 
 instances = []
 
@@ -15,6 +15,7 @@ run = () ->
     .version('0.0.1')
     .usage('[options]')
     .option('-c, --config [file]', 'Set config [%USERPROFILE%/bazinga.toml]', path.join process.env['USERPROFILE'], 'bazinga.toml')
+    .option('-p, --port [port]', 'Set dashbord port [7373]', 7373)
     .parse process.argv
 
   colors.setTheme
@@ -32,6 +33,9 @@ run = () ->
   fs.readFile program.config, (err, data) ->
     return console.log err if err
     restart toml.parse data
+  dashboard = http.createServer (req, res) ->
+    send(req, url.parse(req.url).pathname).root(path.resolve(__dirname, '../dashboard')).pipe(res)
+  dashboard.listen program.port
 
 restart = (config) ->
   _.forEach instances, (instance) -> instance.close
