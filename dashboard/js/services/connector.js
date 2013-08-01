@@ -5,10 +5,12 @@ define(['app', 'lodash', 'socketio'], function(app, _, io) {
       var socket = io.connect();
 
       this.getServers = function(cb){
-        socket.emit('sites', 0, function (sites) {
-          cb(sites);
-        });
+        socket.emit('sites', 0, cb);
       };
+
+      this.subscribe = function(cb){
+        socket.on('log', cb);
+      }
     };
     return new Connector();
   });

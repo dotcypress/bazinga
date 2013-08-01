@@ -1,17 +1,12 @@
 <div class="row">
-  <div class="col-sm-3">
-    <div class="page-header">
-      <h2>Sites</h2>
-    </div>
-    <ul class="sites nav nav-pills nav-stacked">
-      <li ng-repeat="site in sites">
-        <a href="#site/{{site}}">{{site}}</a>
-       </li>
-    </ul>
-  </div>
-  <div class="col-sm-9">
-    <div class="page-header">
-      <h2>Dashboard</h2>
-    </div>
+  <h2>Dashboard</h2>
+  <ul class="nav nav-tabs">
+    <li ng-repeat="item in sites" ng-class="{active: item==site}">
+        <a href="#site/{{item}}">{{item}}</a>
+    </li>
+  </ul>
+  <br>
+  <div>
+<pre id="log" scroll-glue><code ng-repeat="item in logs"><span class="kind {{item.kind}}">[{{item.kind}}] : {{item.code}}</span>  {{item.url}}<br/></code></pre>
   </div>
 </div>

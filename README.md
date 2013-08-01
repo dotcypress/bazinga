@@ -27,6 +27,7 @@ port = 8081
 
 [servers.client]
 directory = "/work/sites/site2/"
+host = "localhost"
 port = 8082
 
 [servers.mobile]

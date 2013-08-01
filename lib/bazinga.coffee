@@ -11,6 +11,8 @@ url = require 'url'
 
 instances = []
 dashboartRoot = path.resolve(__dirname, '../dashboard')
+logger = (data) ->
+  console.log data
 
 run = () ->
   program
@@ -39,7 +41,7 @@ run = () ->
 
     dashboard = http.createServer (req, res) ->
       send(req, url.parse(req.url).pathname).root(dashboartRoot).pipe(res)
-    dashboard.listen program.port
+    dashboard.listen program.port, '127.0.0.1'
 
     socket = io.listen dashboard, log: false
     socket.on 'connection', (socket) -> connectSocket socket, config
@@ -47,6 +49,9 @@ run = () ->
 connectSocket = (socket) ->
   socket.on 'sites', (data, cb) ->
     cb _.pluck instances, 'name'
+
+  logger = (data) ->
+    socket.emit 'log', data
 
 restart = (config) ->
   _.forEach instances, (instance) -> instance.close
@@ -56,16 +61,16 @@ restart = (config) ->
 
       error = (err) ->
         res.statusCode = err.status or 500
-        console.log "[#{key}] <ERROR> #{req.url} : #{res.statusCode}".error
+        logger {key: key, kind: 'ERROR', url: req.url, code: res.statusCode}
         res.end err.message
 
       redirect = () ->
         res.statusCode = 301
         res.setHeader 'Location', "#{req.url}/"
-        console.log "[#{key}] <REDIRECT> #{req.url} -> #{req.url}/".info
+        logger {key: key, kind: 'REDIRECT', url: "#{req.url}/", code: res.statusCode}
         res.end 'Redirecting to #{req.url}/'
 
-      console.log "[#{key}] <REQUEST> #{req.url}".verbose
+      logger {key: key, kind: 'REQUEST', url: req.url, code: res.statusCode}
       path = url.parse(req.url).pathname
       send(req, path)
       .root(instanceConfig.directory)

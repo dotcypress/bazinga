@@ -5,13 +5,13 @@ require.config({
     lodash: 'js/vendor/lodash',
     jquery: 'js/vendor/jquery.min',
     bootstrap: 'js/vendor/bootstrap.min',
-    socketio: "js/vendor/socket.io.min"
+    socketio: 'js/vendor/socket.io.min'
   },
   shim: {
     'angular': {
       exports: 'angular'
     },
-    "bootstrap": ["jquery"],
+    'bootstrap': ['jquery'],
   },
   baseUrl: '/'
 });
@@ -28,8 +28,7 @@ require.config({
     'js/services/connector.js',
 
     // controllers
-    'js/controllers/dashboard.js',
-    'js/controllers/about.js'
+    'js/controllers/dashboard.js'
   ], function() {
     angular.bootstrap(document, ['app']);
   });

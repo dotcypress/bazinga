@@ -1,3 +1,25 @@
 body {
   padding-top: 50px;
 }
+
+#log {
+  height: 500px;
+  display: block;
+  overflow-y: scroll;
+}
+
+.kind {
+ font-weight: bold;
+}
+
+.kind.ERROR {
+  color: red;
+}
+
+.kind.REQUEST {
+  color: blue;
+}
+
+.kind.REDIRECT {
+  color: green;
+}
