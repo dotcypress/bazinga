@@ -16,6 +16,6 @@ define(['angular'], function() {
         });
     }]);
 
-  app.controller('MainCtrl', [function(){}]);
+  app.controller('MainCtrl', ['connector', function(){}]);
   return app;
 });

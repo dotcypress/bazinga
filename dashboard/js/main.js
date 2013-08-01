@@ -4,7 +4,8 @@ require.config({
     angular: 'js/vendor/angular.min',
     lodash: 'js/vendor/lodash',
     jquery: 'js/vendor/jquery.min',
-    bootstrap: 'js/vendor/bootstrap.min'
+    bootstrap: 'js/vendor/bootstrap.min',
+    socketio: "js/vendor/socket.io.min"
   },
   shim: {
     'angular': {
@@ -21,8 +22,10 @@ require.config({
     'jquery',
     'bootstrap',
     'angular',
+    'socketio',
 
     // services
+    'js/services/connector.js',
 
     // controllers
     'js/controllers/dashboard.js',

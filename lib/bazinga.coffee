@@ -2,6 +2,7 @@ _ = require 'lodash'
 colors = require 'colors'
 fs = require 'fs'
 http = require 'http'
+io = require 'socket.io'
 path = require 'path'
 program = require 'commander'
 send = require 'send'
@@ -9,6 +10,7 @@ toml = require 'toml-js'
 url = require 'url'
 
 instances = []
+dashboartRoot = path.resolve(__dirname, '../dashboard')
 
 run = () ->
   program
@@ -32,10 +34,19 @@ run = () ->
 
   fs.readFile program.config, (err, data) ->
     return console.log err if err
-    restart toml.parse data
-  dashboard = http.createServer (req, res) ->
-    send(req, url.parse(req.url).pathname).root(path.resolve(__dirname, '../dashboard')).pipe(res)
-  dashboard.listen program.port
+    config = toml.parse data
+    restart config
+
+    dashboard = http.createServer (req, res) ->
+      send(req, url.parse(req.url).pathname).root(dashboartRoot).pipe(res)
+    dashboard.listen program.port
+
+    socket = io.listen dashboard, log: false
+    socket.on 'connection', (socket) -> connectSocket socket, config
+
+connectSocket = (socket) ->
+  socket.on 'sites', (data, cb) ->
+    cb _.pluck instances, 'name'
 
 restart = (config) ->
   _.forEach instances, (instance) -> instance.close

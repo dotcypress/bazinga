@@ -1,3 +1,17 @@
-<div class="page-header">
-  <h1>Bazinga! dashboard</h1>
+<div class="row">
+  <div class="col-sm-3">
+    <div class="page-header">
+      <h2>Sites</h2>
+    </div>
+    <ul class="sites nav nav-pills nav-stacked">
+      <li ng-repeat="site in sites">
+        <a href="#site/{{site}}">{{site}}</a>
+       </li>
+    </ul>
+  </div>
+  <div class="col-sm-9">
+    <div class="page-header">
+      <h2>Dashboard</h2>
+    </div>
+  </div>
 </div>
