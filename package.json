@@ -1,6 +1,6 @@
 {
   "name": "bazinga",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Awesome static web server",
   "main": "index.js",
   "homepage": "https://github.com/dotCypress/bazinga",

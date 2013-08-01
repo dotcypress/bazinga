@@ -12,7 +12,7 @@ instances = []
 
 run = () ->
   program
-    .version('0.0.0')
+    .version('0.0.1')
     .usage('[options]')
     .option('-c, --config [file]', 'Set config [%USERPROFILE%/bazinga.toml]', path.join process.env['USERPROFILE'], 'bazinga.toml')
     .parse process.argv
