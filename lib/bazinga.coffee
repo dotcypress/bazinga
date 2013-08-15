@@ -12,7 +12,6 @@ url = require 'url'
 instances = []
 dashboartRoot = path.resolve(__dirname, '../dashboard')
 logger = (data) ->
-  console.log data
 
 run = () ->
   program
@@ -60,6 +59,17 @@ restart = (config) ->
     app = http.createServer (req, res) ->
 
       error = (err) ->
+        if instanceConfig.rewrite
+          rule = _.find instanceConfig.rewrite, (rewrite) ->
+            re = new RegExp rewrite[0]
+            re.test req.url
+          if rule
+            re = new RegExp rule[0]
+            newUrl = req.url.replace(re, rule[1]);
+            res.statusCode = 301
+            res.setHeader 'Location', newUrl
+            logger {key: key, kind: 'REWRITE', url: newUrl, code: res.statusCode}
+            res.end 'Redirecting to #{newUrl}/'
         res.statusCode = err.status or 500
         logger {key: key, kind: 'ERROR', url: req.url, code: res.statusCode}
         res.end err.message
